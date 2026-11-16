@@ -1,11 +1,19 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { movies } from '../data/movies';
 import { assetPath } from '../utils/asset';
 
 const strip = movies.slice(9, 13);
 
 export default function Footer() {
+  const { pathname } = useLocation();
   const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  const handleLogoClick = (event) => {
+    if (pathname === '/') {
+      event.preventDefault();
+      window.location.assign(import.meta.env.BASE_URL);
+    }
+  };
 
   return (
     <footer className="footer" id="footer">
@@ -33,7 +41,7 @@ export default function Footer() {
 
         <div className="footer-cols">
           <div className="footer-brand">
-            <Link to="/" className="brand" aria-label="Stackly home">
+            <Link to="/" className="brand" aria-label="Stackly home" onClick={handleLogoClick}>
               <span className="brand-mark"><img src={assetPath('/images/logo-red.png')} alt="Stackly" width="91" height="28" /></span>
             </Link>
             <p>A cinematic explorer built around real posters, real performers and a collection that belongs to you.</p>
@@ -87,22 +95,22 @@ export default function Footer() {
               </li>
               <li>
                 <i className="fa-solid fa-envelope" />
-                <a href="mailto:info@thestackly.com">info@thestackly.com</a>
+                <Link to="/404">info@thestackly.com</Link>
               </li>
               <li>
                 <i className="fa-solid fa-phone" />
-                <a href="tel:+919745673456">+91 9745673456</a>
+                <Link to="/404">+91 9745673456</Link>
               </li>
             </ul>
           </div>
         </div>
 
         <div className="footer-bottom">
-          <span>Copyright &copy; 2026 Stackly Movie Stackly. All rights reserved.</span>
+          <span>&copy; 2026 Stackly &bull; All Rights Reserved.</span>
           <div className="footer-legal">
-            <a href="#footer">Privacy</a>
-            <a href="#footer">Terms</a>
-            <a href="#footer">Cookies</a>
+            <Link to="/404">Privacy Policy</Link>
+            <Link to="/404">Terms</Link>
+            <Link to="/404">Cookies</Link>
           </div>
           <button type="button" className="footer-top" onClick={scrollTop} aria-label="Back to top">
             <i className="fa-solid fa-arrow-up" />

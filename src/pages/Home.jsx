@@ -403,6 +403,13 @@ export default function Home() {
                 <span>{spotlight.certificate}</span>
               </div>
               <p className="spotlight-description">{spotlight.description}</p>
+              <div className="spotlight-insight">
+                <span><i className="fa-solid fa-quote-left" /> Why audiences return</span>
+                <p>
+                  Directed by {spotlight.director}, {spotlight.title} brings {spotlight.genre.join(' and ')} together with standout turns from{' '}
+                  {spotlight.cast.slice(0, 2).map((actor) => actor.name).join(' and ')}. Its {spotlight.rating.toFixed(1)} audience score keeps it among the archive&apos;s most rewatched favourites.
+                </p>
+              </div>
               <div className="spotlight-picks">
                 {popularMovies.slice(0, 5).map((movie) => (
                   <button

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { featuredMovie } from '../data/movies';
 import { assetPath } from '../utils/asset';
@@ -16,10 +16,19 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const menuRef = useRef(null);
   const linksRef = useRef(null);
+  const { pathname } = useLocation();
   const { showToast } = useToast();
 
   const handleLogin = () => {
     showToast('Login is coming soon. Stay tuned.', 'info');
+  };
+
+  const handleLogoClick = (event) => {
+    setOpen(false);
+    if (pathname === '/') {
+      event.preventDefault();
+      window.location.assign(import.meta.env.BASE_URL);
+    }
   };
 
   useEffect(() => {
@@ -71,7 +80,7 @@ export default function Navbar() {
     <>
       <header className={`navbar ${scrolled ? 'is-scrolled' : ''}`}>
         <div className="container nav-inner">
-          <Link to="/" className="brand" aria-label="Stackly home">
+          <Link to="/" className="brand" aria-label="Stackly home" onClick={handleLogoClick}>
             <span className="brand-mark"><img src={assetPath('/images/logo-red.png')} alt="Stackly" width="91" height="28" /></span>
           </Link>
 
@@ -103,7 +112,7 @@ export default function Navbar() {
       <div className="mobile-menu" ref={menuRef} aria-hidden={!open} style={{ visibility: 'hidden', clipPath: 'circle(0% at 92% 6%)' }}>
         <img className="mobile-menu-bg" src={featuredMovie.backdrop} alt="" />
         <div className="mm-top">
-          <Link to="/" className="brand" onClick={() => setOpen(false)}>
+          <Link to="/" className="brand" aria-label="Stackly home" onClick={handleLogoClick}>
             <span className="brand-mark"><img src={assetPath('/images/logo-red.png')} alt="Stackly" width="91" height="28" /></span>
           </Link>
           <button className="nav-burger is-light" aria-label="Close menu" onClick={() => setOpen(false)}>

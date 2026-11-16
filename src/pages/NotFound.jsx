@@ -18,8 +18,6 @@ export default function NotFound() {
       </Link>
       <main className="err-main">
         <div className="err-code-wrap">
-          <span className="err-orbit err-orbit-a" aria-hidden="true" />
-          <span className="err-orbit err-orbit-b" aria-hidden="true" />
           <span className="err-code" data-text="404" aria-label="404">404</span>
         </div>
         <div className="err-copy">

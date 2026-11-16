@@ -24,16 +24,19 @@ export default function Explore() {
   const { hash } = useLocation();
   const [params, setParams] = useSearchParams();
   const [search, setSearch] = useState('');
-  const genre = params.get('genre') || 'All';
+  const genreParam = params.get('genre');
+  const genre = genreParam && allGenres.includes(genreParam) ? genreParam : 'All';
   const [sort, setSort] = useState('default');
   const [actorFilter, setActorFilter] = useState(null);
   const [selected, setSelected] = useState(null);
 
   const setGenre = (value) => {
-    const next = new URLSearchParams(params);
-    if (value === 'All') next.delete('genre');
-    else next.set('genre', value);
-    setParams(next, { replace: true });
+    setParams((current) => {
+      const next = new URLSearchParams(current);
+      if (value === 'All') next.delete('genre');
+      else next.set('genre', value);
+      return next;
+    }, { replace: true });
   };
 
   const filtered = useMemo(() => {
@@ -65,7 +68,11 @@ export default function Explore() {
   const activeActor = actors.find((actor) => actor.id === actorFilter);
   const clearAll = () => {
     setSearch('');
-    setGenre('All');
+    setParams((current) => {
+      const next = new URLSearchParams(current);
+      next.delete('genre');
+      return next;
+    }, { replace: true });
     setSort('default');
     setActorFilter(null);
   };
@@ -197,7 +204,6 @@ export default function Explore() {
               <h2>{activeActor ? `Films with ${activeActor.name}` : genre === 'All' ? 'All films' : `${genre} films`}</h2>
             </div>
             <p>{filtered.length} titles in view · sorted by {sortOptions.find((option) => option.value === sort)?.label.toLowerCase()}</p>
-            <span className="results-chip"><i className="fa-solid fa-database" /> Local archive</span>
           </div>
 
           {filtered.length === 0 ? (
