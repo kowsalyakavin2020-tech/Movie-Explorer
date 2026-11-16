@@ -7,9 +7,11 @@ import App from './App.jsx';
 import { FavoritesProvider } from './context/FavoritesContext.jsx';
 import { ToastProvider } from './context/ToastContext.jsx';
 
+const basename = import.meta.env.BASE_URL.replace(/\/$/, '') || '/';
+
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={basename}>
       <FavoritesProvider>
         <ToastProvider>
           <App />

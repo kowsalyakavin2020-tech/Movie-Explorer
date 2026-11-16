@@ -1,4 +1,5 @@
 ﻿import { actors, getActor } from './actors';
+import { assetPath } from '../utils/asset';
 
 const castOf = (...entries) =>
   entries.map(([id, role]) => {
@@ -6,7 +7,7 @@ const castOf = (...entries) =>
     return { ...actor, role };
   });
 
-export const movies = [
+const movieList = [
   {
     id: 1,
     slug: 'dune-part-two',
@@ -444,6 +445,12 @@ export const movies = [
     cast: castOf(['a44', 'Mark Zuckerberg'], ['a45', 'Eduardo Saverin']),
   },
 ];
+
+export const movies = movieList.map((movie) => ({
+  ...movie,
+  poster: assetPath(movie.poster),
+  backdrop: assetPath(movie.backdrop),
+}));
 
 export const featuredMovie = movies.find((movie) => movie.featured) || movies[0];
 export const trendingMovies = movies.filter((movie) => movie.trending);

@@ -1,4 +1,5 @@
 import { Link, useNavigate } from 'react-router-dom';
+import { assetPath } from '../utils/asset';
 
 export default function NotFound() {
   const navigate = useNavigate();
@@ -12,9 +13,9 @@ export default function NotFound() {
     <div className="err-page">
       <div className="err-grid" aria-hidden="true" />
       <div className="err-glow" aria-hidden="true" />
-      <a href="/" className="brand err-brand" aria-label="Stackly home">
-        <span className="brand-mark"><img src="/images/logo-red.png" alt="Stackly" width="91" height="28" /></span>
-      </a>
+      <Link to="/" className="brand err-brand" aria-label="Stackly home">
+        <span className="brand-mark"><img src={assetPath('/images/logo-red.png')} alt="Stackly" width="91" height="28" /></span>
+      </Link>
       <main className="err-main">
         <div className="err-code-wrap">
           <span className="err-orbit err-orbit-a" aria-hidden="true" />

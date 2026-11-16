@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import gsap from 'gsap';
 import { featuredMovie } from '../data/movies';
+import { assetPath } from '../utils/asset';
 import { useToast } from '../context/ToastContext';
 
 const links = [
@@ -70,9 +71,9 @@ export default function Navbar() {
     <>
       <header className={`navbar ${scrolled ? 'is-scrolled' : ''}`}>
         <div className="container nav-inner">
-          <a href="/" className="brand" aria-label="Stackly home">
-            <span className="brand-mark"><img src="/images/logo-red.png" alt="Stackly" width="91" height="28" /></span>
-          </a>
+          <Link to="/" className="brand" aria-label="Stackly home">
+            <span className="brand-mark"><img src={assetPath('/images/logo-red.png')} alt="Stackly" width="91" height="28" /></span>
+          </Link>
 
           <nav className="nav-links desktop" aria-label="Main navigation">
             {links.map((link) => (
@@ -102,9 +103,9 @@ export default function Navbar() {
       <div className="mobile-menu" ref={menuRef} aria-hidden={!open} style={{ visibility: 'hidden', clipPath: 'circle(0% at 92% 6%)' }}>
         <img className="mobile-menu-bg" src={featuredMovie.backdrop} alt="" />
         <div className="mm-top">
-          <a href="/" className="brand" onClick={() => setOpen(false)}>
-            <span className="brand-mark"><img src="/images/logo-red.png" alt="Stackly" width="91" height="28" /></span>
-          </a>
+          <Link to="/" className="brand" onClick={() => setOpen(false)}>
+            <span className="brand-mark"><img src={assetPath('/images/logo-red.png')} alt="Stackly" width="91" height="28" /></span>
+          </Link>
           <button className="nav-burger is-light" aria-label="Close menu" onClick={() => setOpen(false)}>
             <i className="fa-solid fa-xmark" />
           </button>
@@ -127,8 +128,8 @@ export default function Navbar() {
         <div className="mm-meta">
           <div className="mm-posters">
             <img className="mm-poster" src={featuredMovie.poster} alt={featuredMovie.title} />
-            <img className="mm-poster" src="/images/posters/oppenheimer.webp" alt="Oppenheimer" />
-            <img className="mm-poster" src="/images/posters/barbie.webp" alt="Barbie" />
+            <img className="mm-poster" src={assetPath('/images/posters/oppenheimer.webp')} alt="Oppenheimer" />
+            <img className="mm-poster" src={assetPath('/images/posters/barbie.webp')} alt="Barbie" />
           </div>
           <p>Real posters. Real performers. A film archive curated for the way you watch.</p>
           <button

@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { movies } from '../data/movies';
+import { assetPath } from '../utils/asset';
 
 const strip = movies.slice(9, 13);
 
@@ -32,9 +33,9 @@ export default function Footer() {
 
         <div className="footer-cols">
           <div className="footer-brand">
-            <a href="/" className="brand" aria-label="Stackly home">
-              <span className="brand-mark"><img src="/images/logo-red.png" alt="Stackly" width="91" height="28" /></span>
-            </a>
+            <Link to="/" className="brand" aria-label="Stackly home">
+              <span className="brand-mark"><img src={assetPath('/images/logo-red.png')} alt="Stackly" width="91" height="28" /></span>
+            </Link>
             <p>A cinematic explorer built around real posters, real performers and a collection that belongs to you.</p>
             <div className="footer-social">
               <Link to="/404" aria-label="Instagram"><i className="fa-brands fa-instagram" /></Link>

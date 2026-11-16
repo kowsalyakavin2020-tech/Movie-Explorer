@@ -1,4 +1,6 @@
-export const actors = [
+import { assetPath } from '../utils/asset';
+
+const actorList = [
   {
     id: 'a1',
     name: 'Timothée Chalamet',
@@ -315,5 +317,10 @@ export const actors = [
     image: '/images/actors/andrew-garfield.webp',
   },
 ];
+
+export const actors = actorList.map((actor) => ({
+  ...actor,
+  image: assetPath(actor.image),
+}));
 
 export const getActor = (id) => actors.find((actor) => actor.id === id);
